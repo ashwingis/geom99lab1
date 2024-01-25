@@ -2,143 +2,77 @@
   <head>
     <title>Draggable Directions</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <!-- playground-hide -->
-    <script>
-      const process = { env: {} };
-      process.env.GOOGLE_MAPS_API_KEY =
-        "AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE";
-    </script>
-    <!-- playground-hide-end -->
-  </head>
-  <body>
-    <div id="container">
-      <div id="map"></div>
-      <div id="sidebar">
-        <p>Total Distance: <span id="total"></span></p>
-        <div id="panel"></div>
-      </div>
-    </div>
 
-    <!-- 
-      The `defer` attribute causes the callback to execute after the full HTML
-      document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises.
-      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
-      for more information.
-      -->
-    <script>
-        function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 7,
-        center: { lat: 64.771312, lng: -18.293364 }, // Iceland.
-      });
-      const directionsService = new google.maps.DirectionsService();
-      const directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable: true,
-        map,
-        panel: document.getElementById("panel"),
-      });
-    
-      directionsRenderer.addListener("directions_changed", () => {
-        const directions = directionsRenderer.getDirections();
-    
-        if (directions) {
-          computeTotalDistance(directions);
-        }
-      });
-      displayRoute(
-        "Reykjavík, Iceland",
-        "Reykjavík, Iceland",
-        directionsService,
-        directionsRenderer,
-      );
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./index.js"></script>
+    function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 7,
+    center: { lat: 64.771312, lng: -18.293364 }, // Iceland.
+  });
+  const directionsService = new google.maps.DirectionsService();
+  const directionsRenderer = new google.maps.DirectionsRenderer({
+    draggable: true,
+    map,
+    panel: document.getElementById("panel"),
+  });
+
+  directionsRenderer.addListener("directions_changed", () => {
+    const directions = directionsRenderer.getDirections();
+
+    if (directions) {
+      computeTotalDistance(directions);
     }
-    
-    function displayRoute(origin, destination, service, display) {
-      service
-        .route({
-          origin: origin,
-          destination: destination,
-          waypoints: [
+  });
+  displayRoute(
+    "Reykjavík, Iceland",
+    "Reykjavík, Iceland",
+    directionsService,
+    directionsRenderer,
+  );
+}
+
+function displayRoute(origin, destination, service, display) {
+  service
+    .route({
+      origin: origin,
+      destination: destination,
+      waypoints: [
             { location: "Borgarnes, Iceland" },
             { location: "Blönduós, Iceland" },
             { location: "Akureyri, Iceland" },
             { location: "Egilsstaðir, Iceland" },
             { location: "Höfn, Iceland" },
             { location: "Selfoss, Iceland" },
-          ],
-          travelMode: google.maps.TravelMode.DRIVING,
-          avoidTolls: true,
-        })
-        .then((result) => {
-          display.setDirections(result);
-        })
-        .catch((e) => {
-          alert("Could not display directions due to: " + e);
-        });
-    }
-    
-    function computeTotalDistance(result) {
-      let total = 0;
-      const myroute = result.routes[0];
-    
-      if (!myroute) {
-        return;
-      }
-    
-      for (let i = 0; i < myroute.legs.length; i++) {
-        total += myroute.legs[i].distance.value;
-      }
-    
-      total = total / 1000;
-      document.getElementById("total").innerHTML = total + " km";
-    }
-    
-    window.initMap = initMap;
-    </script>
-    <style>
-        /* Optional: Makes the sample page fill the window. */
-    html,
-    body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    }
+      ],
+      travelMode: google.maps.TravelMode.DRIVING,
+      avoidTolls: true,
+    })
+    .then((result) => {
+      display.setDirections(result);
+    })
+    .catch((e) => {
+      alert("Could not display directions due to: " + e);
+    });
+}
 
-    #container {
-    height: 100%;
-    display: flex;
-    }
+function computeTotalDistance(result) {
+  let total = 0;
+  const myroute = result.routes[0];
 
-    #sidebar {
-    flex-basis: 15rem;
-    flex-grow: 1;
-    padding: 1rem;
-    max-width: 30rem;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: auto;
-    }
+  if (!myroute) {
+    return;
+  }
 
-    #map {
-    flex-basis: 0;
-    flex-grow: 4;
-    height: 100%;
-    }
-    </style>
-  </body>
-</html>
-<html>
-  <head>
-    <title>Draggable Directions</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <!-- playground-hide -->
-    <script>
-      const process = { env: {} };
-      process.env.GOOGLE_MAPS_API_KEY =
-        "AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE";
-    </script>
-    <!-- playground-hide-end -->
+  for (let i = 0; i < myroute.legs.length; i++) {
+    total += myroute.legs[i].distance.value;
+  }
+
+  total = total / 1000;
+  document.getElementById("total").innerHTML = total + " km";
+}
+
+window.initMap = initMap;
 
   </head>
   <body>
@@ -161,105 +95,33 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly"
       defer
     ></script>
-    <script>
-        function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 7,
-        center: { lat: 64.771312, lng: -18.293364 }, // Iceland.
-      });
-      const directionsService = new google.maps.DirectionsService();
-      const directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable: true,
-        map,
-        panel: document.getElementById("panel"),
-      });
-    
-      directionsRenderer.addListener("directions_changed", () => {
-        const directions = directionsRenderer.getDirections();
-    
-        if (directions) {
-          computeTotalDistance(directions);
-        }
-      });
-      displayRoute(
-        "Reykjavík, Iceland",
-        "Reykjavík, Iceland",
-        directionsService,
-        directionsRenderer,
-      );
-    }
-    
-    function displayRoute(origin, destination, service, display) {
-      service
-        .route({
-          origin: origin,
-          destination: destination,
-          waypoints: [
-            { location: "Borgarnes, Iceland" },
-            { location: "Blönduós, Iceland" },
-            { location: "Akureyri, Iceland" },
-            { location: "Egilsstaðir, Iceland" },
-            { location: "Höfn, Iceland" },
-            { location: "Selfoss, Iceland" },
-          ],
-          travelMode: google.maps.TravelMode.DRIVING,
-          avoidTolls: true,
-        })
-        .then((result) => {
-          display.setDirections(result);
-        })
-        .catch((e) => {
-          alert("Could not display directions due to: " + e);
-        });
-    }
-    
-    function computeTotalDistance(result) {
-      let total = 0;
-      const myroute = result.routes[0];
-    
-      if (!myroute) {
-        return;
-      }
-    
-      for (let i = 0; i < myroute.legs.length; i++) {
-        total += myroute.legs[i].distance.value;
-      }
-    
-      total = total / 1000;
-      document.getElementById("total").innerHTML = total + " km";
-    }
-    
-    window.initMap = initMap;
-    </script>
-    <style>
-        /* Optional: Makes the sample page fill the window. */
-    html,
-    body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    }
+    /* Optional: Makes the sample page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-    #container {
-    height: 100%;
-    display: flex;
-    }
+#container {
+  height: 100%;
+  display: flex;
+}
 
-    #sidebar {
-    flex-basis: 15rem;
-    flex-grow: 1;
-    padding: 1rem;
-    max-width: 30rem;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: auto;
-    }
+#sidebar {
+  flex-basis: 15rem;
+  flex-grow: 1;
+  padding: 1rem;
+  max-width: 30rem;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
 
-    #map {
-    flex-basis: 0;
-    flex-grow: 4;
-    height: 100%;
-    }
-    </style>
+#map {
+  flex-basis: 0;
+  flex-grow: 4;
+  height: 100%;
+}
   </body>
 </html>
