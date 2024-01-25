@@ -2,6 +2,13 @@
   <head>
     <title>Draggable Directions</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <!-- playground-hide -->
+    <script>
+      const process = { env: {} };
+      process.env.GOOGLE_MAPS_API_KEY =
+        "AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE";
+    </script>
+    <!-- playground-hide-end -->
   </head>
   <body>
     <div id="container">
@@ -19,10 +26,6 @@
       See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
       for more information.
       -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly"
-      defer
-    ></script>
     <script>
         function initMap() {
       const map = new google.maps.Map(document.getElementById("map"), {
