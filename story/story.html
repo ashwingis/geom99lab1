@@ -1,4 +1,15 @@
-function initMap() {
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+  <head>
+    <title>My Road Trip in Iceland</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+      function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 7,
       center: { lat: 64.771312, lng: -18.293364 }, // Iceland.
@@ -66,3 +77,37 @@ function initMap() {
   }
   
   window.initMap = initMap;
+    </script>
+    <style>
+      /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      /* 
+        * Always set the map height explicitly to define the size of the div element
+        * that contains the map. 
+        */
+      #map {
+        height: 100%;
+      }
+
+      /* 
+      * Optional: Makes the sample page fill the window. 
+      */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>
