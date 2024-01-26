@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+
+<!-- Source: https://developers.google.com/maps/documentation/javascript/examples/directions-draggable -->
+
 <html>
   <head>
     <title>My Road Trip in Iceland</title>
@@ -9,16 +18,50 @@
         "AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE";
     </script>
     <!-- playground-hide-end -->
-
+    <h1>My Road Trip in Iceland</h1>
+    <div class="name">
+      <p>by Ashwin Balaji Srinivasan</p>
+    </div>
+    <img class=opening src="./images/iceland.jpg" alt="Iceland">
   </head>
   <body>
-    <h1>My Road Trip in Iceland</h1>
-    <div id="container">
+      <div id="container">
       <div id="map"></div>
       <div id="sidebar">
         <p>Total Distance: <span id="total"></span></p>
         <div id="panel"></div>
       </div>
+    </div>
+    <div class="content">
+      <p>A road trip on the Ring Road is one of Iceland’s best experiences. With 7 to 10 days, you can drive around entire circumference of  Iceland, visiting the highlights and several off-the-beaten-path destinations. Stand in front of mighty Skógafoss, tour the Golden Circle, relax in the Blue Lagoon, go whale watching and glacier hiking, explore the lovely city of Reykjavík, and visit many of Iceland’s most beautiful waterfalls. </p>
+    </div>
+
+    <div class="gallery">
+        <img src="./images/black beach.jpg" alt="Black Beach">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+
+    <div class="gallery">
+        <img src="./images/road and nature.jpg" alt="Road and Nature">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+    
+    <div class="gallery">
+        <img src="./images/northern lights.jpg" alt="Northern Lights">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+    
+    <div class="gallery">
+        <img src="./images/waterfall.jpg" alt="Waterfall" width=>
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+
+    <div class="end">
+      <p>Iceland is the perfect place for road trips and the government makes this easy to plan with their national routes. Some of them are signposted to help you along your way while others are less formal but no less of an adventure. Before any road trip, you need to plan your route and this is no less the case in Iceland with these routes. They will help you plan your itinerary and decide on the hire car you need but you still need to do the logistics and research of where you want to visit. </p>
     </div>
 
     <!-- 
@@ -115,12 +158,69 @@
       position:absolute;
       top: 30px;
       text-align:center;
-      padding-left: 57%;
-      font-family: Trebuchet MS;
+      padding-top: 22%;
+      padding-left: 33%;
+      font-family: Century Gothic;
       font-style: bold;
-      font-size: 28px;
+      font-size: 56px;
       z-index: 1;
     }
+
+    .name {
+      position:absolute;
+      text-align: center;
+      font-family: Century Gothic;
+      font-size: 18px;
+      z-index: 1;
+      padding-top: 29%;
+      padding-left: 42%;
+    }
+
+    .opening{
+      width:100%;
+      height: 600px;
+      opacity:0.8;
+    }
+
+    .content {
+      font-family: century gothic;
+      font-size: large;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      color: rgb(63, 63, 63);
+    }
+
+    div.gallery {
+      margin: 60px;
+      border: 1px solid #ccc;
+      float: left;
+      width: 800px;
+    }
+
+    div.gallery:hover {
+      border: 2px solid #777;
+    }
+
+    div.gallery img {
+      width: 100%;
+      height: 600px;
+    }
+
+    div.desc {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .end {
+      font-family: century gothic;
+      font-size: large;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      color: rgb(63, 63, 63);
+    }
+
     #container {
     height: 100%;
     display: flex;
